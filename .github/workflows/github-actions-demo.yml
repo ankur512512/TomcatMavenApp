@@ -15,6 +15,9 @@ jobs:
       tomcat:
         # Docker Hub image
         image: tomcat:9.0
+      docker:
+        # Docker dind image
+        image: docker:dind
         
     steps:
       # Downloads a copy of the code in your repository before running CI tests
