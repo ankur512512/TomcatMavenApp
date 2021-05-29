@@ -10,7 +10,12 @@ jobs:
     # Docker Hub image that `container-job` executes in
     container: maven
 
-
+    services:
+      # Label used to access the service container
+      tomcat:
+        # Docker Hub image
+        image: tomcat:9.0
+        
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
@@ -26,4 +31,8 @@ jobs:
       #Build with Maven 3
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
+        
+      # Testing docker commands
+      - name: testing
+        run: docker ps
 
