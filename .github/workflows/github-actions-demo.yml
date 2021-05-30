@@ -40,8 +40,8 @@ jobs:
         run: mvn --batch-mode --update-snapshots verify
       
         
-      # Testing docker commands
-      - name: testing
-        run: docker ps
+#       # Testing docker commands
+#       - name: testing
+#         run: docker ps
       - name: testing2
         run: ls -lrth /var/lib/docker/volumes
