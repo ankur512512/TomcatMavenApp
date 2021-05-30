@@ -5,20 +5,18 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Docker Hub image that `container-job` executes in
-#     container: docker:dind
-
+  
     services:
       # Label used to access the service container
       tomcat:
         # Docker Hub image
         image: tomcat:9.0
-#       docker:
-#         # Docker dind image
-#         image: docker:dind
         
     steps:
-      - uses: actions/checkout@v2
+    
+      # Build Steps  
+      - name: Checkout Code
+        uses: actions/checkout@v2
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -32,26 +30,16 @@ jobs:
           restore-keys: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}    
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
-      
-      #Build with Maven 3
-#       - name: Setup Maven
-#         uses: stCarolas/setup-maven@v4.1
-#         with:
-#           maven-version: 3.5.4
-#       - name: Build with Maven
-#         run: mvn --batch-mode --update-snapshots verify
-      
         
-      # Testing docker commands
-      - name: testing
+        
+      # Deploying to Tomcat Docker Container
+      - name: Getting container name
         run: echo "NAME=`docker ps --filter ancestor=tomcat:9.0 --format "{{.Names}}"`" >> $GITHUB_ENV
-      - name: list docker instances
-        run: docker ps
-      - name: testing2
-        run: echo "${{ env.NAME }}"
-      - name: list file
-        run: ls -lrth target/*.war
-      - name: Copy file
+        
+      - name: Copy file into tomcat container webapps directory
         run: docker cp target/TomcatMavenApp-2.0-SNAPSHOT.war ${{ env.NAME }}:/usr/local/tomcat/webapps/tomcat.war
-      - name: Inside tomcat
+      
+      - name: Wait for the war to explode and then curl to see output
         run: sleep 10 && docker exec ${{ env.NAME }} curl -L localhost:8080/tomcat
+  
+    
