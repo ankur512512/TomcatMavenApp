@@ -53,3 +53,5 @@ jobs:
         run: ls -lrth target/*.war
       - name: Copy file
         run: docker cp target/TomcatMavenApp-2.0.war ${{ env.NAME }}:/usr/local/tomcat/webapps
+      - name: Inside tomcat
+        run: docker exec -it ${{ env.NAME }} ls -lrth /usr/local/tomcat/webapps
