@@ -25,6 +25,8 @@ jobs:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v2
+        with:
+          maven-version: 3.5.4
 
       # Setup JDK in container
       - name: Set up JDK 11
