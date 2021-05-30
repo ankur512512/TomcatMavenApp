@@ -36,7 +36,7 @@ jobs:
       #Build with Maven 3
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
-      - run: cp target/*.war /usr/local/tomcat/webapps
+      - run: ls -lrth /usr/local/tomcat/webapps
         
       # Testing docker commands
       - name: testing
