@@ -45,9 +45,11 @@ jobs:
       # Testing docker commands
       - name: testing
         run: echo "NAME=`docker ps --filter ancestor=tomcat:9.0 --format "{{.Names}}"`" >> $GITHUB_ENV
+      - name: list docker instances
+        run: docker ps
       - name: testing2
         run: echo "${{ env.NAME }}"
       - name: list file
         run: ls -lrth target/*.war
-#       - name: Copy file
-#         run: docker cp target/*.war ${{ env.NAME }}:/usr/local/tomcat/webapps
+      - name: Copy file
+        run: docker cp target/TomcatMavenApp-2.0.war ${{ env.NAME }}:/usr/local/tomcat/webapps
