@@ -44,8 +44,8 @@ jobs:
         
       # Testing docker commands
       - name: testing
-        run: export NAME=`docker ps --filter ancestor=tomcat:9.0 --format "{{.Names}}"`
+        run: echo "NAME=`docker ps --filter ancestor=tomcat:9.0 --format "{{.Names}}"`" >> $GITHUB_ENV
       - name: testing2
-        run: echo $NAME
+        run: echo "${{ env.NAME }}"
       - name: Copy file
         run: docker cp target/*.war $NAME:/usr/local/tomcat/webapps
