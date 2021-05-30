@@ -3,9 +3,7 @@ name: Maven build and deploy
 on: [push]
 
 jobs:
-  # Label of the container job
-  container-job:
-    # Containers must run in Linux based operating systems
+  build:
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
     container: docker:dind
@@ -15,8 +13,6 @@ jobs:
       tomcat:
         # Docker Hub image
         image: tomcat:9.0
-        env:
-         name: something
 #       docker:
 #         # Docker dind image
 #         image: docker:dind
@@ -35,18 +31,18 @@ jobs:
           distribution: 'adopt'
       
       #Build with Maven 3
-      - name: Setup Maven
-        uses: stCarolas/setup-maven@v4.1
-        with:
-          maven-version: 3.5.4
+#       - name: Setup Maven
+#         uses: stCarolas/setup-maven@v4.1
+#         with:
+#           maven-version: 3.5.4
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
       
         
-      # Testing docker commands
-      - name: testing
-        run: NAME=`docker ps --filter ancestor=ubuntu --format "{{.Names}}"`
-      - name: testing2
-        run: echo $NAME
-      - name: Copy file
-        run: docker cp target/*.war $NAME:/usr/local/tomcat/webapps
+#       # Testing docker commands
+#       - name: testing
+#         run: NAME=`docker ps --filter ancestor=ubuntu --format "{{.Names}}"`
+#       - name: testing2
+#         run: echo $NAME
+#       - name: Copy file
+#         run: docker cp target/*.war $NAME:/usr/local/tomcat/webapps
