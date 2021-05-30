@@ -54,4 +54,4 @@ jobs:
       - name: Copy file
         run: docker cp target/TomcatMavenApp-2.0-SNAPSHOT.war ${{ env.NAME }}:/usr/local/tomcat/webapps/tomcat.war
       - name: Inside tomcat
-        run: sleep 5 && docker exec ${{ env.NAME }} curl -L localhost:8080/tomcat
+        run: sleep 10 && docker exec ${{ env.NAME }} curl -L localhost:8080/tomcat
