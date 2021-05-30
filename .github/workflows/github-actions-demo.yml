@@ -39,5 +39,5 @@ jobs:
       - name: testing
         run: docker ps
       - name: testing2
-        run: docker exec -it postgres ls
+        run: docker exec -it tomcat ls
 
