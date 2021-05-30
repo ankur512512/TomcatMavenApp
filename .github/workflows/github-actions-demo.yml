@@ -24,6 +24,12 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2    
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
       
@@ -38,7 +44,7 @@ jobs:
         
       # Testing docker commands
       - name: testing
-        run: NAME=`docker ps --filter ancestor=tomcat:9.0 --format "{{.Names}}"`
+        run: export NAME=`docker ps --filter ancestor=tomcat:9.0 --format "{{.Names}}"`
       - name: testing2
         run: echo $NAME
       - name: Copy file
