@@ -15,6 +15,8 @@ jobs:
       tomcat:
         # Docker Hub image
         image: tomcat:9.0
+        volumes: 
+        - /usr/local/tomcat
       docker:
         # Docker dind image
         image: docker:dind
@@ -39,5 +41,4 @@ jobs:
       - name: testing
         run: docker ps
       - name: testing2
-        run: docker exec -it tomcat ls
-
+        run: ls -lrth /usr/local/tomcat
