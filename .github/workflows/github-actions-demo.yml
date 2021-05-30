@@ -29,7 +29,7 @@ jobs:
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2    
+          restore-keys: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}    
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
       
@@ -48,6 +48,6 @@ jobs:
       - name: testing2
         run: echo "${{ env.NAME }}"
       - name: list file
-        run: ls -lrth
+        run: ls -lrth target/*.war
 #       - name: Copy file
 #         run: docker cp target/*.war ${{ env.NAME }}:/usr/local/tomcat/webapps
