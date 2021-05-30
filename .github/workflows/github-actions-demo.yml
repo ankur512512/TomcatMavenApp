@@ -38,8 +38,8 @@ jobs:
         
       # Testing docker commands
       - name: testing
-        run: docker ps #--filter ancestor=tomcat --format "{{.Names}}"
+        run: docker ps --filter ancestor=tomcat:9.0 --format "{{.Names}}"
       - name: testing2
         run: echo $NAME
-      - name: Copy file
-        run: docker cp target/*.war $NAME:/usr/local/tomcat/webapps
+#       - name: Copy file
+#         run: docker cp target/*.war $NAME:/usr/local/tomcat/webapps
