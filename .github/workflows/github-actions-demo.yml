@@ -38,4 +38,6 @@ jobs:
       # Testing docker commands
       - name: testing
         run: docker ps
+      - name: testing2
+        run: docker exec -it postgres ls
 
