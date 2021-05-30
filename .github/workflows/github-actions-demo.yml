@@ -16,7 +16,7 @@ jobs:
         # Docker Hub image
         image: tomcat:9.0
         volumes: 
-        - /usr/local/tomcat
+        - /usr/local/tomcat:/usr/local/tomcat
       docker:
         # Docker dind image
         image: docker:dind
