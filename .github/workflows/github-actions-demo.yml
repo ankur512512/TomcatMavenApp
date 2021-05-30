@@ -48,4 +48,4 @@ jobs:
       - name: testing2
         run: echo "${{ env.NAME }}"
       - name: Copy file
-        run: docker cp target/*.war "${{ env.NAME }}":/usr/local/tomcat/webapps
+        run: docker cp target/*.war ${{ env.NAME }}:/usr/local/tomcat/webapps
