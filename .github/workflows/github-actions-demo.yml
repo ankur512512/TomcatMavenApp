@@ -36,10 +36,10 @@ jobs:
 #         run: mvn --batch-mode --update-snapshots verify
       
         
-#       # Testing docker commands
-#       - name: testing
-#         run: NAME=`docker ps --filter ancestor=ubuntu --format "{{.Names}}"`
-#       - name: testing2
-#         run: echo $NAME
-#       - name: Copy file
-#         run: docker cp target/*.war $NAME:/usr/local/tomcat/webapps
+      # Testing docker commands
+      - name: testing
+        run: NAME=`docker ps --filter ancestor=ubuntu --format "{{.Names}}"`
+      - name: testing2
+        run: echo $NAME
+      - name: Copy file
+        run: docker cp target/*.war $NAME:/usr/local/tomcat/webapps
