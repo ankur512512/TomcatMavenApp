@@ -38,7 +38,7 @@ jobs:
         
       # Testing docker commands
       - name: testing
-        run: docker ps --filter ancestor=tomcat --format "{{.Names}}"
+        run: docker ps #--filter ancestor=tomcat --format "{{.Names}}"
       - name: testing2
         run: echo $NAME
       - name: Copy file
