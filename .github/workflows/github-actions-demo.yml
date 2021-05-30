@@ -8,7 +8,7 @@ jobs:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
-    container: docker:dind
+    container: maven
 
     services:
       # Label used to access the service container
@@ -16,10 +16,10 @@ jobs:
         # Docker Hub image
         image: tomcat:9.0
         volumes: 
-        - /usr/local/tomcat:/usr/local/tomcat
-      docker:
-        # Docker dind image
-        image: docker:dind
+        - /usr/local/tomcat/webapps:/usr/local/tomcat/webapps
+#       docker:
+#         # Docker dind image
+#         image: docker:dind
         
     steps:
       # Downloads a copy of the code in your repository before running CI tests
@@ -33,12 +33,13 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       
-#       #Build with Maven 3
-#       - name: Build with Maven
-#         run: mvn --batch-mode --update-snapshots verify
+      #Build with Maven 3
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots verify
+      - run: cp target/*.war /usr/local/tomcat/webapps
         
       # Testing docker commands
       - name: testing
         run: docker ps
       - name: testing2
-        run: ls -lrth /usr/local/tomcat
+        run: ls -lrth /usr/local/tomcat/webapps
