@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
-    container: docker:dind
+#     container: docker:dind
 
     services:
       # Label used to access the service container
