@@ -40,6 +40,6 @@ jobs:
         
       # Testing docker commands
       - name: testing
-        run: docker ps --filter "network=tomcat" --format "{{.Names}}"
+        run: docker ps --filter network=tomcat --format "{{.Names}}"
       - name: testing2
         run: docker ps
